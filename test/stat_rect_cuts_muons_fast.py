@@ -71,17 +71,22 @@ for filename in filelist:
                 ROOT.gApplication.Terminate()
 
     nonprompt_rej = nonprompt_all - nonprompt_pass
-    sig_eff = float(prompt_pass)/prompt_all
-    bkg_rej = float(nonprompt_rej)/nonprompt_all
+    sig_eff_val = float(prompt_pass)/prompt_all
+    sig_eff_err = (1/float(prompt_all))*sqrt(prompt_pass*(1-float(prompt_pass)/prompt_all))
+    bkg_rej_val = float(nonprompt_rej)/nonprompt_all
+    bkg_rej_err = (1/float(nonprompt_all))*sqrt(nonprompt_rej*(1-float(nonprompt_rej)/nonprompt_all))
+
     print filename,":"
-    print "    Sig eff:", sig_eff
-    print "    Sig eff error:", (1/float(prompt_all))*sqrt(prompt_pass*(1-float(prompt_pass)/prompt_all))
-    print "    Bkg rej:", bkg_rej
-    print "    Bkg rej error:", (1/float(nonprompt_all))*sqrt(nonprompt_rej*(1-float(nonprompt_rej)/nonprompt_all))
+    print "    Sig eff:", sig_eff_val
+    print "    Sig eff error:", sig_eff_err
+    print "    Bkg rej:", bkg_rej_val
+    print "    Bkg rej error:", bkg_rej_err
     print "    Prompt all,pass:", prompt_all,prompt_pass
     print "    Non-prompt all,rej:", nonprompt_all,nonprompt_rej
+
+    print "(%f,%f,%f,%f)" % (sig_eff_val, bkg_rej_val, sig_eff_err, bkg_rej_err)
     
-    profile.Fill(sig_eff, bkg_rej, 1)
+    profile.Fill(sig_eff_val, bkg_rej_val, 1)
     file.Close()
 
 profile.SetLineColor(2)
