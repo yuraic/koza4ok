@@ -5,7 +5,8 @@ from math import *
 from array import *
 
 #filelist = [ "/Users/musthero/Documents/Yura/Applications/tmva_local/output_muons_0.root" ] 
-filelist = [ "/Users/musthero/Documents/Yura/Applications/tmva_local/output_muons_test.root" ] 
+#filelist = [ "/Users/musthero/Documents/Yura/Applications/tmva_local/output_muons_test.root" ] 
+filelist = [ "/Users/musthero/Documents/Yura/Applications/TMVA-v4.2.0/test/output_muons_fullsim_v5_20per.root" ]
 
 
 profile = ROOT.TProfile("RECTCuts", "RECTCuts", 100, 0, 1, "s");
@@ -14,7 +15,7 @@ for filename in filelist:
 
     # Get TTree
     file = ROOT.TFile.Open(filename)
-    tree = file.JINRTree
+    tree = file.JINRTree_3
 
     # Declare counting variables
     prompt_all = 0; prompt_pass = 0;
@@ -50,9 +51,11 @@ for filename in filelist:
             sys.stdout.flush()
 
         # Preselection cuts
-        if m_mu_isprompt[0] == 1 and m_mu_Tight[0] == 1 and m_mu_screwed_isprompt[0] == 0:    # Signal (take from TCut in TMVAMuon.C for signal):
+        #if m_mu_isprompt[0] == 1 and m_mu_Tight[0] == 1 and m_mu_screwed_isprompt[0] == 0:    # Signal (take from TCut in TMVAMuon.C for signal):
+        if m_mu_isprompt[0] == 1 and m_mu_Tight[0] == 1:    # Signal (take from TCut in TMVAMuon.C for signal):
             prompt_all += 1
-        elif m_mu_isprompt[0] == 0 and m_mu_Tight[0] == 1 and m_mu_screwed_isprompt[0] == 0:  # Background (take from TCut in TMVAMuon.C for background):
+        #elif m_mu_isprompt[0] == 0 and m_mu_Tight[0] == 1 and m_mu_screwed_isprompt[0] == 0:  # Background (take from TCut in TMVAMuon.C for background):
+        elif m_mu_isprompt[0] == 0 and m_mu_Tight[0] == 1:  # Background (take from TCut in TMVAMuon.C for background):
             nonprompt_all += 1
         else:
             continue
