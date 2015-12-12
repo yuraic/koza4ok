@@ -21,10 +21,10 @@ from sklearn.metrics import classification_report, roc_auc_score, roc_curve
 from sklearn import tree
 import cPickle
 
-histo_sk_sig=TH1F('histo_sk_sig', 'scikit-learn BDT score for signal', 200, -1.0, 1.0)
-histo_sk_bkg=TH1F('histo_sk_bkg', 'scikit-learn BDT score for background', 200, -1, 1)
-histo_tmva_sig=TH1F('histo_tmva_sig', 'TMVA/TskMVA BDT score for signal', 200, -1, 1)
-histo_tmva_bkg=TH1F('histo_tmva_bkg', 'TMVA/TskMVA BDT score for background', 200, -1, 1)
+histo_sk_sig=TH1F('histo_sk_sig', 'Muons: scikit-learn BDT score for signal', 200, -1.0, 1.0)
+histo_sk_bkg=TH1F('histo_sk_bkg', 'Muons: scikit-learn BDT score for background', 200, -1, 1)
+histo_tmva_sig=TH1F('histo_tmva_sig', 'Muons: TMVA/TskMVA BDT score for signal', 200, -1, 1)
+histo_tmva_bkg=TH1F('histo_tmva_bkg', 'Muons: TMVA/TskMVA BDT score for background', 200, -1, 1)
 
 reader = ROOT.TMVA.Reader()
 
