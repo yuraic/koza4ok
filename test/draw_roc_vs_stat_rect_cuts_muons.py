@@ -20,7 +20,7 @@ if __name__ == "__main__":
     hSig = rootfile.Get(hsig_path)
     hBkg = rootfile.Get(hbkg_path)
 
-    g = build_roc(hSig, hBkg)
+    g = build_roc(hSig, hBkg, 1)
     ll = [g]
 
     g.SetLineColor(ROOT.kBlue)

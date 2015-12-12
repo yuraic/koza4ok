@@ -7,7 +7,7 @@ from ROOT import TH1F
 
 xrange_bins = lambda nbins: xrange(1, nbins+1)
 
-def build_roc(h_sig, h_bkg):
+def build_roc(h_sig, h_bkg, verbose=0):
 
     nbins_sig = h_sig.GetXaxis().GetNbins()
     nbins_bkg = h_bkg.GetXaxis().GetNbins()
@@ -41,6 +41,10 @@ def build_roc(h_sig, h_bkg):
         #print seff, brej
         sig_eff.append(seff)
         bkg_rej.append(brej) 
+
+        if verbose == 1:
+            bdt_score = min_val + i * step
+            print "bdt score =", bdt_score, "sig_eff =", seff 
         
         #bin_sig = h_sig.GetBinContent()
     print "Overflow =", h_sig.GetBinContent(nbins_sig+1)
