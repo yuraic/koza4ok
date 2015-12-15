@@ -66,7 +66,7 @@ for event in t:
         print "Event number %i" % c
         sys.stdout.flush()
 
-    #if c == 100000: break
+    if c == 200000: break
 
     if not event.m_mu_Tight == 1 : continue
 
@@ -83,17 +83,17 @@ for event in t:
     #score = bdt.predict([m_mu_pt[0], m_mu_eta[0], m_mu_sigd0PV[0], m_mu_z0SinTheta[0], 
     #    m_mu_etcone20Dpt[0], m_mu_ptcone20Dpt[0]]).item(0)
 
-    #score = bdt.decision_function([m_mu_pt[0], m_mu_eta[0], m_mu_sigd0PV[0], m_mu_z0SinTheta[0], 
-    #    m_mu_etcone20Dpt[0], m_mu_ptcone20Dpt[0]]).item(0)
+    score = bdt.decision_function([m_mu_pt[0], m_mu_eta[0], m_mu_sigd0PV[0], m_mu_z0SinTheta[0], 
+        m_mu_etcone20Dpt[0], m_mu_ptcone20Dpt[0]]).item(0)
 
     # calculate the value of the classifier with TMVA/TskMVA
     bdtOutput = reader.EvaluateMVA("BDT")
 
     if m_mu_isprompt == 0:
-        #histo_sk_bkg.Fill(score)
+        histo_sk_bkg.Fill(score)
         histo_tmva_bkg.Fill(bdtOutput)
     elif m_mu_isprompt == 1:
-        #histo_sk_sig.Fill(score)
+        histo_sk_sig.Fill(score)
         histo_tmva_sig.Fill(bdtOutput)
     else:
         print "Warning: m_mu_isprompt is not 0 or 1!!!"
