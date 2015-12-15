@@ -54,7 +54,7 @@ def build_roc(h_sig, h_bkg, verbose=0):
     g.GetXaxis().SetRangeUser(0.0,1.0)
     g.GetYaxis().SetRangeUser(0.0,1.0)
     #g.Draw("AC")
-    g.SetLineColor(ROOT.kRed)
+    #g.SetLineColor(ROOT.kRed)
     g.SetTitle("ROC curve")
     
 
