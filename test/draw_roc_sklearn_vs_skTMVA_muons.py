@@ -48,7 +48,7 @@ if __name__ == "__main__":
     g2.SetLineColor(ROOT.kRed)
     g2.Draw("SAME") # draw TGraph with no marker dots
 
-    leg = ROOT. TLegend(0.1,0.5,0.3,0.4)
+    leg = ROOT.TLegend(0.1,0.5,0.3,0.4)
     #leg.SetHeader("ROC curve")
     leg.AddEntry("g1","skTMVA","l")
     leg.AddEntry("g2","sklearn","l")
