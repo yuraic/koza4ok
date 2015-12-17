@@ -75,7 +75,7 @@ for event in t:
         print "Event number %i" % c
         sys.stdout.flush()
 
-    if c == 150000: break
+    if c == 200000: break
 
     if not event.m_el_VeryTightLH == 1 : continue
 
@@ -120,6 +120,15 @@ fpr, tpr, _ = roc_curve(y_test, sk_y_predicted)
 sig_eff = array.array('f', [rate for rate in tpr])
 bkg_rej = array.array('f',[ (1-rate) for rate in fpr])
 
+# roc_curve_sk() - skTMVA version of roc_curve
+from mva_tools.build_roc_simple import roc_curve_sk
+fpr_comp, tpr_comp, _ = roc_curve_sk(y_test, sk_y_predicted)
+
+
+sig_eff_comp = array.array('f', [rate for rate in tpr_comp])
+bkg_rej_comp = array.array('f',[ (1-rate) for rate in fpr_comp])
+
+
 # Stack for keeping plots
 plots = []
 
@@ -129,7 +138,7 @@ g1.SetName("g1")
 g1.SetTitle("skTMVA ROC curve [electrons]")
 plots.append(g1)
 
-g1.SetLineColor(ROOT.kBlue)
+g1.SetLineColor(8) # Green color
 g1.Draw("AL") # draw TGraph with no marker dots
 
 # Getting ROC-curve for sklearn
@@ -143,6 +152,18 @@ plots.append(g2)
 g2.SetLineStyle(7)
 g2.SetLineColor(ROOT.kRed)
 g2.Draw("SAME") # draw TGraph with no marker dots
+
+# Getting ROC curve from roc_curve_sk (skTMVA implementation of scikitlearn roc_curve method)
+g3 = ROOT.TGraph(len(tpr_comp), sig_eff_comp, bkg_rej_comp)
+g3.GetXaxis().SetRangeUser(0.0,1.0)
+g3.GetYaxis().SetRangeUser(0.0,1.0)
+g3.SetName("g3")
+g3.SetTitle("skTMVA version of ROC curve [electrons]")
+plots.append(g3)
+
+g3.SetLineStyle(3)
+g3.SetLineColor(ROOT.kBlue) 
+g3.Draw("SAME") # draw TGraph with no marker dots
 
 
 
