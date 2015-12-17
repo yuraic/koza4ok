@@ -1,5 +1,6 @@
 import sys
 from array import array
+import numpy as np
 
 import ROOT
 
@@ -61,6 +62,57 @@ def build_roc(h_sig, h_bkg, verbose=0):
     return g
     
     #print nbins_bkg
+
+def column_or_1d(y):
+    shape = np.shape(y)
+    if len(shape) == 1:
+        return np.ravely(y)
+    if len(shape) == 2 and shape[1] == 1:
+        return np.ravel(y)
+
+
+def roc_curve_sk(y_test, sk_y_predicted, step = 0.001):
+
+    pos_label = 1 # prompt lepton
+    neg_label = 0 # non-prompt lepton
+
+    y_test = column_or_1d(y_test)
+
+    assert y_test.size == sk_y_predicted.size, "Error: len(y_test) != len(sk_y_predicted)"
+    assert np.unique(y_test).size == 2, "Error: number of classes is %i. Expected 2 classes only." % np.unique(y_test).size
+
+    # calculate number of prompt and non-prompt leptons
+    num_prompts = np.sum(y_test == pos_label)
+    num_nonprompts = y_test.size - num_prompts
+
+    # array of probability cut values 
+    # minimum probability is 0, maximum is one, 
+    # and step is defind above
+    cuts = np.arange(0, 1, step)
+
+    tpr = []
+    fpr = []
+
+    for cut in cuts:
+        prompts_passed = 0
+        nonprompts_passed = 0
+
+        indxs = np.where(sk_y_predicted >= cut)
+        y_test_passed = np.take(y_test, indxs)
+        prompts_passed = np.sum(y_test_passed == pos_label)
+        nonprompts_passed = np.sum(y_test_passed == neg_label)
+        
+        tpr.append(float(prompts_passed)/num_prompts)
+        fpr.append(float(nonprompts_passed)/num_nonprompts)
+
+    return np.array(fpr), np.array(tpr), 0
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
