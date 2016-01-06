@@ -96,7 +96,7 @@ for event in t:
     score = bdt.decision_function([m_el_pt[0], m_el_eta[0], m_el_sigd0PV[0], m_el_z0SinTheta[0], 
         m_el_etcone20Dpt[0], m_el_ptcone20Dpt[0]]).item(0)
     
-    # save sklern score
+    # save sklearn score
     _sk_y_predicted.append(score)
 
     # calculate the value of the classifier with TMVA/TskMVA
