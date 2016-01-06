@@ -15,8 +15,8 @@ import xml.etree.cElementTree as ET
 import sys
 
 # load decision tree
-with open('electrons_v5_VeryTightLH_20per.pkl', 'rb') as fid:
-#with open('muons_v5_Tight_20per.pkl', 'rb') as fid:
+#with open('electrons_v5_VeryTightLH_20per.pkl', 'rb') as fid:
+with open('muons_v5_Tight_20per.pkl', 'rb') as fid:
     bdt = cPickle.load(fid)
 
 clf = bdt
@@ -24,15 +24,6 @@ clf = bdt
 if clf.n_classes_ != 2:
     sys.exit("Error: Number of classes in sklearn classifier is not equal 2.")
 
-# Order of variables must be _exactly_ as in the training numpy array
-var_list = [ 
-                ('m_el_pt', 'F'),
-                ('m_el_eta', 'F'), 
-                ('m_el_sigd0PV', 'F'), 
-                ('m_el_z0SinTheta', 'F'), 
-                ('m_el_etcone20Dpt', 'F'), 
-                ('m_el_ptcone20Dpt', 'F')
-            ]
 
 # Parameters
 #  - Node purity 
@@ -97,18 +88,9 @@ def build_xml_tree(dt, node_id, node_pos, parent_depth, parent_elementTree):
 # <MethodSetup>
 MethodSetup = ET.Element("MethodSetup", Method="BDT::BDT")
 
-#<Variables>
-Variables = ET.SubElement(MethodSetup, "Variables", NVar=str(len(var_list)))
-for ind, val in enumerate(var_list):
-    name = val[0]
-    var_type = val[1]
-    Variable = ET.SubElement(Variables, "Variable", VarIndex=str(ind), Type=val[1], 
-        Expression=name, Label=name, Title=name, Unit="", Internal=name, 
-        Min="0.0e+00", Max="0.0e+00")
-
 # <GeneralInfo>
 GeneralInfo = ET.SubElement(MethodSetup, "GeneralInfo")
-Info_Creator = ET.SubElement(GeneralInfo, "Info", name="Creator", value="Koza4ok (skTMVA)")
+Info_Creator = ET.SubElement(GeneralInfo, "Info", name="Creator", value="Koza4ok (TskMVA)")
 Info_AnalysisType = ET.SubElement(GeneralInfo, "Info", name="AnalysisType", value="Classification")
 
 # <Options>

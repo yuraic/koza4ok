@@ -1,5 +1,6 @@
 # Author: Yuriy Ilchenko (ilchenko@physics.utexas.edu)
 # Compare two ROC curves from scikit-learn and from TMVA (using skTMVA converter)
+# 
 
 import os
 import sys
@@ -31,24 +32,19 @@ m_el_pt = array.array('f',[0])
 reader.AddVariable("m_el_pt", m_el_pt)
 m_el_eta = array.array('f',[0])
 reader.AddVariable("m_el_eta", m_el_eta)
-
 m_el_sigd0PV = array.array('f',[0])
 reader.AddVariable("m_el_sigd0PV", m_el_sigd0PV)
-
 m_el_z0SinTheta = array.array('f', [0])
 reader.AddVariable("m_el_z0SinTheta", m_el_z0SinTheta)
-
 m_el_etcone20Dpt = array.array('f',[0])
 reader.AddVariable("m_el_etcone20Dpt", m_el_etcone20Dpt)
 m_el_ptcone20Dpt = array.array('f',[0])
 reader.AddVariable("m_el_ptcone20Dpt", m_el_ptcone20Dpt)
 
-
 # Download BDT weights
 #reader.BookMVA("BDT","MVAnalysis_BDT.weights.xml")
 reader.BookMVA("BDT",
     "/Users/musthero/Documents/Yura/Applications/koza4ok/test/ttH_Run1_LeptonID/weights/SKLearn_BDT_electons.weights.xml")
-    #"/Users/musthero/Documents/Yura/Applications/tmva_local/my.xml")
 
 # Read ROOT file with the events to classify
 input_filename = "/Users/musthero/Documents/Yura/Applications/TMVA-v4.2.0/test/output_electrons_fullsim_v5_20per.root"
@@ -103,7 +99,7 @@ for event in t:
     bdtOutput = reader.EvaluateMVA("BDT")
 
     # save TMVA score
-    _tmva_y_predicted.append(bdtOutput)
+    _tmva_y_predicted.append(score)
 
     # save real score
     _y_test.append([m_el_isprompt])
@@ -116,7 +112,7 @@ tmva_y_predicted = np.array(_tmva_y_predicted)
 y_test = np.array(_y_test)
 
 # Calculate ROC curves
-# NOTE: looking in the scikit learn internals,
+# NOTE: lookin in the scikit learn internals,
 # the trick is that metrics.roc_curve is insenstive to
 # whether you provide it with probability or output bdt score. 
 # This makes things a lot more easier.
