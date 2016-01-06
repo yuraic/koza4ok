@@ -108,13 +108,6 @@ def roc_curve_sk(y_test, sk_y_predicted, step = 0.001):
     return np.array(fpr), np.array(tpr), 0
 
 
-
-
-
-
-
-
-
 if __name__ == "__main__":
     path = "/Users/musthero/Documents/Yura/Applications/tmva_local/BDT_score_distributions_electrons.root"
     histo_sk_sig = "histo_sk_sig"
