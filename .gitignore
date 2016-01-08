@@ -3,3 +3,5 @@
 *.swp
 
 test/.DS_Store
+examples/*.xml
+examples/*.pkl
