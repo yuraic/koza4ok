@@ -43,7 +43,7 @@ To run it, go to ```examples``` folder and execute in the command line,
 > python -i validate_sklearn_to_tmva.py
 ```
 
-You should notice two files created - ```bdt_sklearn_to_tmva_example.pkl``` and ```bdt_sklearn_to_tmva_example.xml``` - the first one contains trained BDT model whereas the second one is TMVA xml-file. ```validate_sklearn_to_tmva.py``` uses these tow files to produce and compare two ROC-curves that are produced by scikit-learn and TMVA correspondingly. If all is okay, the ROC-curves should be drawn one on top of another. The pop-up window will show up with the ROC-curve comparison.
+You should notice two files created - ```bdt_sklearn_to_tmva_example.pkl``` and ```bdt_sklearn_to_tmva_example.xml``` - the first one contains trained BDT model whereas the second one is TMVA xml-file. ```validate_sklearn_to_tmva.py``` uses these two files to produce and compare two ROC-curves that are produced by scikit-learn and TMVA correspondingly. If all is okay, the ROC-curves should be drawn one on top of another. The pop-up window will show up with the ROC-curve comparison.
 
 ## Contacts
 
