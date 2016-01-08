@@ -1,4 +1,7 @@
 # koza4ok
+
+<img width="260px" align="right" hspace="7" vspace="5" src="https://web2.ph.utexas.edu/~ilchenko/img/roc_github.png">
+
 The package contains scikit-learn to TMVA convertor called ```skTMVA```. The idea is to save scikit-learn BDT model to the TMVA xml-file. This allows you to use scikit-learn model directly from TMVA. Once the model is trained and converted, scikit-learn library is not needed anymore! The classification task can be performed with TMVA/ROOT only. This is particularly useful within ATLAS framework where there is no scikit-learn install. A user can train the classifier with scikit-learn on his laptop and later use in ATLAS framework converted to the TMVA xml-file. 
 
 ## Dependencies
@@ -15,7 +18,7 @@ Basically just add `koza4ok` root directory to PYTHONPATH, or do this
 
 ## skTMVA converter
 
-To convert BDT to TMVA xml-file, use
+To convert BDT to TMVA xml-file, use the following method in your <b>python</b> code (see Examples section below),
 ```python
 convert_bdt_sklearn_tmva(bdt, [('var1', 'F'), ('var2', 'F')], 'bdt_sklearn_to_tmva_example.xml')
 ```
