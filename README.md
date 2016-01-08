@@ -2,7 +2,7 @@
 The package contains scikit-learn to TMVA convertor called ```skTMVA```. The idea is to save scikit-learn BDT model to the TMVA xml-file. This allows you to use scikit-learn model directly from TMVA. Once the model is trained and converted, scikit-learn library is not needed anymore! The classification task can be performed with TMVA/ROOT only. This is particularly useful within ATLAS framework where there is no scikit-learn install. A user can train the classifier with scikit-learn on his laptop and later use in ATLAS framework converted to the TMVA xml-file. 
 
 ## Dependencies
-- [ROOT](http://root.cern.ch) - with TMVA package in it
+- [ROOT](http://root.cern.ch) (with TMVA package)
 - [NumPy](http://www.numpy.org/)
 - [scikit-learn](http://scikit-learn.org/)
 
@@ -16,11 +16,11 @@ Basically just add `koza4ok` root directory to PYTHONPATH, or do this
 ## skTMVA converter
 
 To convert BDT to TMVA xml-file, use
-```
+```python
 convert_bdt_sklearn_tmva(bdt, [('var1', 'F'), ('var2', 'F')], 'bdt_sklearn_to_tmva_example.xml')
 ```
 
-where ```bdt``` is your scikit-learn trained model, ```bdt_sklearn_to_tmva_example.xml``` is the output TMVA xml-file. ```[('var1', 'F'), ('var2', 'F')]``` is the input variable description for TMVA. It consists of variable name and its basic type (e.g. 'F' is float). Please note, that ordering here must be same as columns in your numpy array!
+where ```bdt``` is your scikit-learn trained model, ```bdt_sklearn_to_tmva_example.xml``` is the output TMVA xml-file. ```'[('var1', 'F'), ('var2', 'F')]'``` is the input variable description for TMVA. It consists of variable name and its basic type (e.g. 'F' is float). Please note, that ordering here must be same as columns in your numpy array!
 
 Important: at the moment the only supported boosting algorithm is AdaBoost. It's trivial to do but I have not gotten to this just yet.
 
@@ -33,7 +33,7 @@ So, the example contains two files,
 - [examples/bdt_sklearn_to_tmva.py ](https://github.com/yuraic/koza4ok/blob/master/examples/bdt_sklearn_to_tmva.py) - trains BDT with sklearn, converts it to TMVA xml-file, saves originally trained sklearn BDT to pickle file
 - [examples/validate_sklearn_to_tmva.py](https://github.com/yuraic/koza4ok/blob/master/examples/validate_sklearn_to_tmva.py) - build two ROC-curves: one from sklearn by extracting BDT from pickle file and another from TMVA by using the reader on the input TMVA xml file from previous stage
 
-To run it, go to the ```examples``` folder and execute as follows,
+To run it, go to ```examples``` folder and execute in the command line,
 
 ```
 > python bdt_sklearn_to_tmva.py 
@@ -44,7 +44,7 @@ You should notice two files created - ```bdt_sklearn_to_tmva_example.pkl``` and 
 
 ## Contacts
 
-If you have any question, suggestion or comment, please don't hesitate to contact me. My homepage with contact information is here - [https://web2.ph.utexas.edu/~ilchenko/index.html](https://web2.ph.utexas.edu/~ilchenko/index.html)
+If you have any question, suggestion or comment, please don't hesitate to contact me. My homepage is [https://web2.ph.utexas.edu/~ilchenko/index.html](https://web2.ph.utexas.edu/~ilchenko/index.html)
 
 
 
