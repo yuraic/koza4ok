@@ -18,7 +18,7 @@ Basically just add `koza4ok` root directory to PYTHONPATH, or do this
 
 ## skTMVA converter
 
-To convert BDT to TMVA xml-file, use the following method in your <b>python</b> code (see Examples section below),
+To convert BDT to TMVA xml-file, use the following method in your <b>python</b> code (see [Examples](https://github.com/yuraic/koza4ok#examples)),
 ```python
 convert_bdt_sklearn_tmva(bdt, [('var1', 'F'), ('var2', 'F')], 'bdt_sklearn_to_tmva_example.xml')
 ```
