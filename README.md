@@ -2,7 +2,7 @@
 
 <img width="260px" align="right" hspace="7" vspace="5" src="https://web2.ph.utexas.edu/~ilchenko/img/roc_github.png">
 
-The package contains scikit-learn to TMVA convertor called ```skTMVA```. The idea is to save scikit-learn BDT model to the TMVA xml-file. This allows you to use scikit-learn model directly from TMVA. Once the model is trained and converted, scikit-learn library is not needed anymore! The classification task can be performed with TMVA/ROOT only. This is particularly useful within ATLAS framework where there is no scikit-learn install. A user can train the classifier with scikit-learn on his laptop and later use in ATLAS framework converted to the TMVA xml-file. 
+The package contains scikit-learn to TMVA convertor called ```skTMVA```. The idea is to save scikit-learn BDT model to the TMVA xml-file. This allows you to use scikit-learn model directly from TMVA. Once the model is trained and converted, scikit-learn library is not needed anymore! The classification task can be performed with TMVA/ROOT only. This is particularly useful within ATLAS framework where there is no scikit-learn installed. A user can train the classifier with scikit-learn on his laptop and later use in ATLAS framework converted to the TMVA xml-file. 
 
 ## Dependencies
 - [ROOT](http://root.cern.ch) (with TMVA package)
