@@ -1,6 +1,4 @@
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import AdaBoostClassifier
-
 from sklearn.ensemble import GradientBoostingClassifier
 
 from skTMVA import convert_bdt_sklearn_tmva
@@ -10,7 +8,7 @@ import cPickle
 import numpy as np
 from numpy.random import RandomState
 
-RNG = RandomState(21)
+RNG = RandomState(31)
 
 # Construct an example dataset for binary classification
 n_vars = 2
