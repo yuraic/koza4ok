@@ -11,7 +11,7 @@ The package contains scikit-learn to TMVA convertor called ```skTMVA```. The ide
 
 
 ## Installation
-Basically just add `koza4ok` root directory to PYTHONPATH, or do this
+Basically just add `koza4ok` root directory to your PYTHONPATH enviroment variable. Or you can do this,
 ```
 > source setup_koza4ok.sh
 ```
@@ -23,43 +23,42 @@ To convert BDT to TMVA xml-file, use the following method in your <b>python</b> 
 convert_bdt_sklearn_tmva(bdt, [('var1', 'F'), ('var2', 'F')], 'bdt_sklearn_to_tmva_example.xml')
 ```
 
+> Supports: AdaBoost or Gradient Boosting decision trees for binary classification. 
+> In terms of High-Energy Physics jargon, AdaBoost or Gradient Boosting BDTs for signal and background discrimination. 
+
 where ```bdt``` is your scikit-learn trained model, ```bdt_sklearn_to_tmva_example.xml``` is the output TMVA xml-file. ```'[('var1', 'F'), ('var2', 'F')]'``` is the input variable description for TMVA. It consists of variable names and their basic types (e.g. ```'F'``` is for float). Please note, that the ordering here must be the same as the order of columns in your numpy array.
 
 Important! At the moment the only supported boosting algorithm is AdaBoost. It's trivial to do but I have not gotten to this just yet.
 
-## What BDT type are supported?
+## Example
 
-skTMVA supports only binary classification trees with AdaBoost and Gradient Boosting. 
+You can test the code with our example. No input dataset is needed. The dataset is generated on-fly - both signal and background follow Gaussian distribution with different mean values (thanks to [root_numpy](http://rootpy.github.io/root_numpy/, I stole this part of the code from them).
 
-## Examples
+The example is devided in two pieces,
 
-You can play with examples. They don't require to have a dataset. The dataset is generated on-fly - both signal and background follow Gaussian distribution with different mean values (thanks to [root_numpy](http://rootpy.github.io/root_numpy/, I stole this part of the code from them).
+- Training and converting
 
-The examples are devided in two parts,
+    Depending on the type of boosting you prefer more, there are two scripts to test. Both of these train BDT with sklearn, then save it to TMVA xml-file and to a pickle file for scikit-learn,
 
-#### Training and converting
+    - [examples/bdt_sklearn_to_tmva_AdaBoost.py ](https://github.com/yuraic/koza4ok/blob/master/examples/bdt_sklearn_to_tmva_AdaBoost.py) - AdaBoost
+    - [examples/bdt_sklearn_to_tmva_Grad.py ](https://github.com/yuraic/koza4ok/blob/master/examples/bdt_sklearn_to_tmva_Grad.py) - Gradient Boosting
 
-Depending on the type of boosting you want to work with, two test scripts are prepared. Both of these scripts train BDT with sklearn, then save it to TMVA xml-file and to a pickle file for scikit-learn. 
+- Validation
 
-- [examples/bdt_sklearn_to_tmva_AdaBoost.py ](https://github.com/yuraic/koza4ok/blob/master/examples/bdt_sklearn_to_tmva_AdaBoost.py) - AdaBoost
-- [examples/bdt_sklearn_to_tmva_GB.py ](https://github.com/yuraic/koza4ok/blob/master/examples/bdt_sklearn_to_tmva_GB.py) - Gradient Boosting
+    After the previous step, it's critical to insure that scikit-learn and TMVA give you the same classification predictions on a test dataset. The following script performs the converter validation,
 
-#### Validation
-
-After the previous step, it's critical to insure that scikit-learn and TMVA give you the same classification predictions on a test dataset. The following script performs the converter validation,
-
-- [examples/validate_sklearn_to_tmva.py](https://github.com/yuraic/koza4ok/blob/master/examples/validate_sklearn_to_tmva.py) - build two ROC-curves: one from sklearn by extracting BDT from pickle file and another from TMVA by using the reader on the input TMVA xml file from previous stage
+    - [examples/validate_sklearn_to_tmva.py](https://github.com/yuraic/koza4ok/blob/master/examples/validate_sklearn_to_tmva.py) - build two ROC-curves: one from sklearn by extracting BDT from pickle file and another from TMVA by using the reader on the input TMVA xml file from previous stage
 
 To run the example, in the command line change directory to ```examples``` folder, and run
 
 AdaBoost:
-```
+```sh
 > python bdt_sklearn_to_tmva_AdaBoost.py  
 > python -i validate_sklearn_to_tmva.py
 ```
 
 Gradient Boosting:
-```
+```sh
 > python bdt_sklearn_to_tmva_GB.py  
 > python -i validate_sklearn_to_tmva.py
 ```
@@ -68,7 +67,7 @@ You should notice two files created - ```bdt_sklearn_to_tmva_example.pkl``` and 
 
 ## Contacts
 
-If you have any question, suggestion or comment, please don't hesitate to contact me - [https://web2.ph.utexas.edu/~ilchenko/index.html](https://web2.ph.utexas.edu/~ilchenko/index.html)
+For any question, suggestion or comment, please don't hesitate to contact me - [https://web2.ph.utexas.edu/~ilchenko/index.html](https://web2.ph.utexas.edu/~ilchenko/index.html)
 
 
 
