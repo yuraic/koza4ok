@@ -22,13 +22,15 @@ To convert BDT to TMVA xml-file, use the following method in your <b>python</b> 
 ```python
 convert_bdt_sklearn_tmva(bdt, [('var1', 'F'), ('var2', 'F')], 'bdt_sklearn_to_tmva_example.xml')
 ```
+where 
+
+- ```bdt``` is your scikit-learn trained model, 
+- ```'[('var1', 'F'), ('var2', 'F')]'``` is the input variable description for TMVA. It consists of variable names and their basic types (e.g. ```'F'``` is for float). Please note, that the ordering here must be the same as the order of columns in your numpy array,
+- ```bdt_sklearn_to_tmva_example.xml``` is the output TMVA xml-file
 
 > Supports: AdaBoost or Gradient Boosting decision trees for binary classification. 
+
 > In terms of High-Energy Physics jargon, AdaBoost or Gradient Boosting BDTs for signal and background discrimination. 
-
-where ```bdt``` is your scikit-learn trained model, ```bdt_sklearn_to_tmva_example.xml``` is the output TMVA xml-file. ```'[('var1', 'F'), ('var2', 'F')]'``` is the input variable description for TMVA. It consists of variable names and their basic types (e.g. ```'F'``` is for float). Please note, that the ordering here must be the same as the order of columns in your numpy array.
-
-Important! At the moment the only supported boosting algorithm is AdaBoost. It's trivial to do but I have not gotten to this just yet.
 
 ## Example
 
