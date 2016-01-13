@@ -28,13 +28,14 @@ where
 - ```python '[('var1', 'F'), ('var2', 'F')]' ``` is the input variable description for TMVA. It consists of variable names and their basic types (e.g. ```'F'``` is for float). Please note, that the ordering here must be the same as the order of columns in your numpy array,
 - ```python bdt_sklearn_to_tmva_example.xml ``` is the output TMVA xml-file
 
+
 > Supports: AdaBoost or Gradient Boosting decision trees for binary classification. 
 
 > In terms of High-Energy Physics jargon, AdaBoost or Gradient Boosting BDTs for signal and background discrimination. 
 
 ## Example
 
-You can test the code with our example. No input dataset is needed. The dataset is generated on-fly - both signal and background follow Gaussian distribution with different mean values (thanks to [root_numpy](http://rootpy.github.io/root_numpy/, I stole this part of the code from them).
+You can test the code with our example. No input dataset is needed. The dataset is generated on-fly - both signal and background follow Gaussian distribution with different mean values (thanks to [root_numpy](http://rootpy.github.io/root_numpy/), I stole this part of the code from them).
 
 The example is devided in two pieces,
 
@@ -61,7 +62,7 @@ AdaBoost:
 
 Gradient Boosting:
 ```sh
-> python bdt_sklearn_to_tmva_GB.py  
+> python bdt_sklearn_to_tmva_Grad.py  
 > python -i validate_sklearn_to_tmva.py
 ```
 
