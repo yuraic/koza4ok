@@ -24,9 +24,9 @@ convert_bdt_sklearn_tmva(bdt, [('var1', 'F'), ('var2', 'F')], 'bdt_sklearn_to_tm
 ```
 where 
 
-- ```python bdt ``` is your scikit-learn trained model, 
-- ```python '[('var1', 'F'), ('var2', 'F')]' ``` is the input variable description for TMVA. It consists of variable names and their basic types (e.g. ```'F'``` is for float). Please note, that the ordering here must be the same as the order of columns in your numpy array,
-- ```python bdt_sklearn_to_tmva_example.xml ``` is the output TMVA xml-file
+- ```bdt ``` is your scikit-learn trained model, 
+- ```'[('var1', 'F'), ('var2', 'F')]' ``` is the input variable description for TMVA. It consists of variable names and their basic types (e.g. ```'F'``` is for float). Please note, that the ordering here must be the same as the order of columns in your numpy array,
+- ```bdt_sklearn_to_tmva_example.xml ``` is the output TMVA xml-file
 
 
 > Supports: AdaBoost or Gradient Boosting decision trees for binary classification. 
@@ -35,7 +35,7 @@ where
 
 ## Example
 
-You can test the code with our example. No input dataset is needed. The dataset is generated on-fly - both signal and background follow Gaussian distribution with different mean values (thanks to [root_numpy](http://rootpy.github.io/root_numpy/), I stole this part of the code from them).
+You can play with our example. No input dataset is needed. The dataset is generated on-fly - both signal and background follow Gaussian distribution with different mean values (thanks to [root_numpy](http://rootpy.github.io/root_numpy/), I steal this part of the code from them).
 
 The example is devided in two pieces,
 

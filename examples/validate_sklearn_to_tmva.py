@@ -27,7 +27,7 @@ RNG = RandomState(45)
 
 # Construct an example dataset for binary classification
 n_vars = 2
-n_events = 100
+n_events = 300
 signal = RNG.multivariate_normal(
     np.ones(n_vars), np.diag(np.ones(n_vars)), n_events)
 background = RNG.multivariate_normal(
@@ -39,6 +39,35 @@ y[signal.shape[0]:] *= -1
 permute = RNG.permutation(y.shape[0])
 X = X[permute]
 y = y[permute]
+
+# Some print-out
+print "Event numbers total:", 2 * n_events
+
+# Plot the testing points
+c1 = ROOT.TCanvas("c1","Testing Dataset",200,10,700,500)
+c1.cd()
+plot_colors = (ROOT.kRed, ROOT.kBlue)
+mg = ROOT.TMultiGraph()
+for i, n, c in zip([-1, 1], ('Class A', 'Class B'), plot_colors):
+    idx = np.where(y == i)
+
+    n = len(idx[0])
+    g = ROOT.TGraph(n,X[idx, 0][0],X[idx, 1][0])
+
+    g.SetMarkerColor(c)
+    g.SetMarkerStyle(8)
+    g.SetMarkerSize(0.5)
+
+    mg.Add(g)
+ 
+mg.Draw("ap p")
+mg.SetTitle("Testing dataset")
+mg.GetXaxis().SetTitle("var1")
+mg.GetYaxis().SetTitle("var2")
+
+c1.Update()
+c1.Modified()
+
 
 # Use all dataset for testing
 X_test, y_test, w_test = X, y, w
@@ -71,7 +100,7 @@ n = X.shape[0]
 for i in xrange(n):
 
     if (i % 100 == 0) and (i != 0):
-        print "Event number %i" % i
+        print "Event %i" % i
 
     var1[0] = X.item((i,0))
     var2[0] = X.item((i,1))
@@ -105,6 +134,9 @@ bkg_rej_tmva = array.array('f',[ (1-rate) for rate in fpr_tmva])
 # Stack for keeping plots
 #plots = []
 
+c2 = ROOT.TCanvas("c2","A Simple Graph Example",200,10,700,500)
+c2.cd()
+
 # Draw ROC-curve for sklearn
 g1 = ROOT.TGraph(len(sig_eff_sk), sig_eff_sk, bkg_rej_sk)
 g1.GetXaxis().SetRangeUser(0.0,1.0)
@@ -133,6 +165,9 @@ leg.AddEntry("g1","sklearn","l")
 leg.AddEntry("g2","skTMVA","l")
 leg.Draw()
 
+c2.Update()
+c2.Modified()
+
 ## Draw ROC curves
 #plt.figure()
 #
@@ -149,3 +184,7 @@ leg.Draw()
 #plt.legend(loc="lower right")
 #
 #plt.savefig("roc_bdt_curves.png", dpi=96)
+
+
+
+
