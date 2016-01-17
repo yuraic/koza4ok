@@ -35,7 +35,7 @@ where
 
 ## Example
 
-You can test the code with our example. No input dataset is needed. The dataset is generated on-fly - both signal and background follow Gaussian distribution with different mean values (thanks to [root_numpy](http://rootpy.github.io/root_numpy/), I stole this part of the code from them).
+You can play with our example. No input dataset is needed. The dataset is generated on-fly - both signal and background follow Gaussian distribution with different mean values (thanks to [root_numpy](http://rootpy.github.io/root_numpy/), I steal this part of the code from them).
 
 The example is devided in two pieces,
 
