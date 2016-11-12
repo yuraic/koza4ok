@@ -1,5 +1,7 @@
 import sys
 
+import xgboost
+
 from sklearn import datasets
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import AdaBoostClassifier
@@ -255,6 +257,3 @@ def convert_bdt_sklearn_tmva(sklearn_bdt_clf, input_var_list, tmva_outfile_xml):
     # Gradient Boosting (binary classification only)
     if isinstance(sklearn_bdt_clf, GradientBoostingClassifier):
         convert_bdt__Grad(sklearn_bdt_clf, input_var_list, tmva_outfile_xml)
-
-
-
