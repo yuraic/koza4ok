@@ -30,7 +30,7 @@ X_train, y_train, w_train = X, y, w
 
 # Declare BDT - we are going to use AdaBoost Decision Tree
 dt = DecisionTreeClassifier(max_depth=3,
-                            min_samples_leaf=0.05*len(X_train))
+                            min_samples_leaf=int(0.05*len(X_train)))
 bdt = AdaBoostClassifier(dt,
                          algorithm='SAMME',
                          n_estimators=800,
