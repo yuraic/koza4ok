@@ -97,6 +97,9 @@ n = X.shape[0]
 # Iterate over events
 # Note: this is not the fastest way for sklearn
 #        but most representative, I believe
+import matplotlib.pyplot as plt
+bdts=[]
+skls=[]
 for i in xrange(n):
 
     if (i % 100 == 0) and (i != 0):
@@ -106,16 +109,19 @@ for i in xrange(n):
     var2[0] = X.item((i,1))
 
     # sklearn score
-    score = bdt.decision_function([var1[0], var2[0]]).item(0)
+    score = bdt.predict_proba([var1[0], var2[0]])[0][1]
 
     # calculate the value of the classifier with TMVA/TskMVA
-    bdtOutput = reader.EvaluateMVA("BDT")
+    bdtOutput = (reader.EvaluateMVA("BDT")+1)/2.
+    bdts.append(bdtOutput)
+    skls.append(score)
 
     # save skleanr and TMVA BDT output scores
     sk_y_predicted.append(score)
     tmva_y_predicted.append(bdtOutput)
 
-
+plt.scatter(bdts,skls)
+plt.show()
 # Convert arrays to numpy arrays
 sk_y_predicted = np.array(sk_y_predicted)
 tmva_y_predicted = np.array(tmva_y_predicted)

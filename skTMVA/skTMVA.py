@@ -128,7 +128,7 @@ def convert_bdt__AdaBoost(sklearn_bdt_clf, input_var_list, tmva_outfile_xml):
     tree = ET.ElementTree(MethodSetup)
     tree.write(tmva_outfile_xml)
 
-def build_xml_tree__Grad(dt, node_id, node_pos, parent_depth, parent_elementTree):
+def build_xml_tree__Grad(dt, node_id, node_pos, parent_depth, parent_elementTree, learning_rate):
 
     n_nodes = dt.tree_.node_count
     children_left = dt.tree_.children_left
@@ -149,8 +149,8 @@ def build_xml_tree__Grad(dt, node_id, node_pos, parent_depth, parent_elementTree
 
         node_elementTree = ET.SubElement(parent_elementTree, "Node", pos=pos, depth=depth, NCoef="0", IVar=IVar, 
             Cut=Cut, cType="1", res="0.0e+01", rms="0.0e+00", purity="0.0e+00", nType="0")
-        build_xml_tree__Grad(dt, children_left[node_id], "l", node_depth, node_elementTree)
-        build_xml_tree__Grad(dt, children_right[node_id], "r", node_depth, node_elementTree)
+        build_xml_tree__Grad(dt, children_left[node_id], "l", node_depth, node_elementTree,learning_rate)
+        build_xml_tree__Grad(dt, children_right[node_id], "r", node_depth, node_elementTree,learning_rate)
     else:
         # leaf node
         node_depth = parent_depth + 1
@@ -161,7 +161,7 @@ def build_xml_tree__Grad(dt, node_id, node_pos, parent_depth, parent_elementTree
         IVar = -1
 
         global NodePurityLimit
-        sig = value[node_id][0][0]
+        sig = value[node_id][0][0]*learning_rate/2.
         #total = float(sig + bkg)
         #purity = float(sig)/total
         #nType = 1 if purity >= NodePurityLimit else -1
@@ -197,6 +197,7 @@ def convert_bdt__Grad(sklearn_bdt_clf, input_var_list, tmva_outfile_xml):
     #  Run-time parameters
     NTrees = clf.n_estimators
 
+    learning_rate = clf.learning_rate
 
     #<MethodSetup Method="BDT::BDT">
     # <GeneralInfo>
@@ -240,7 +241,7 @@ def convert_bdt__Grad(sklearn_bdt_clf, input_var_list, tmva_outfile_xml):
     for idx, dt in enumerate(clf.estimators_[:, 0]):
         # <BinaryTree type="DecisionTree" boostWeight="9.2106320437773737e-01" itree="0">
         BinaryTree = ET.SubElement(Weights, "BinaryTree", type="DecisionTree", boostWeight="1.0e+00", itree=str(idx))
-        build_xml_tree__Grad(dt, 0, "s", -1, BinaryTree)
+        build_xml_tree__Grad(dt, 0, "s", -1, BinaryTree,learning_rate)
 
 
     # Create XML-tree structure and save it to file
