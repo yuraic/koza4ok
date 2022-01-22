@@ -1,3 +1,9 @@
+[![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+[![Project Status: Unsupported – The project has reached a stable, usable state but the author(s) have ceased all work on it. A new maintainer may be desired.](https://www.repostatus.org/badges/latest/unsupported.svg)](https://www.repostatus.org/#unsupported)
+
+# ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) Important Note
+This repo is NOT supported since Fall 2016. It is not recommended using it for real life projects. I keep this repo here rather for historical purposes. 
+
 # koza4ok
 
 <img width="260px" align="right" hspace="7" vspace="5" src="https://web2.ph.utexas.edu/~ilchenko/img/roc_github.png">
