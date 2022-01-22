@@ -30,7 +30,7 @@ X_train, y_train, w_train = X, y, w
 
 # Declare BDT - we are going to use AdaBoost Decision Tree
 bdt = GradientBoostingClassifier(
-    n_estimators=200, learning_rate=0.5,
+    n_estimators=100, learning_rate=0.01,
     min_samples_leaf=int(0.05*len(X_train)),
     max_depth=3, random_state=0)
 
